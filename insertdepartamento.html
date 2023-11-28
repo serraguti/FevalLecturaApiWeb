@@ -53,6 +53,18 @@
                 })
                 contador += 1;
             })
+
+            $("#botoneliminar").click(function() {
+                var id = 99;
+                var request = "api/departamentos/" + id;
+                $.ajax({
+                    "url": url + request,
+                    "type": "DELETE",
+                    success: function() {
+                        $("#mensaje").text("Departamento 99 eliminado");
+                    }
+                })
+            })
         })
     </script>
 </head>
@@ -62,6 +74,9 @@
     </button>
     <button id="botonmodificar">
         Modificar departamento 99
+    </button>
+    <button id="botoneliminar">
+        Eliminar departamento 99
     </button>
     <h1 style="color:blue" id="mensaje"></h1>
 </body>
