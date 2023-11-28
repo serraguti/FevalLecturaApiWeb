@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS API</title>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script>
+        var url = "https://apiejemplos.azurewebsites.net/";
+        $(document).ready(function() {
+            $("#botonload").click(function() {
+                var request = "api/jugadores";
+                $.ajax({
+                    "url": url + request,
+                    "method": "GET",
+                    "dataType": "json",
+                    success: function(data){
+                        //ESTE API TRAE UN CONJUNTO DE ELEMENTOS
+                        //DEBEMOS RECORRER DICHO CONJUNTO
+                        var html = "";
+                        $.each(data, function(index, jugador) {
+                            //LAS PROPIEDADES SON DINAMICAS, ES DECIR, 
+                            //NO TENEMOS AYUDA, SIMPLEMENTE LAS ESCRIBIMOS TAL 
+                            //Y COMO ESTEN DENTRO DEL JSON
+                            html += "<h5>" + jugador.nombre + "</h5>";
+                            html += "<img src='" + jugador.imagen + "' style='width:80px; height: 80px'/>";
+                        })
+                        $("#capajugadores").html(html);
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <h1 style="color:blue">
+        Lectura Api Jugadores
+    </h1>
+    <button id="botonload">
+        Load Jugadores
+    </button>
+    <img src="peterporker.png" style="width:150px; height: 180px;"/>
+    <div id="capajugadores" style="float:left"></div> 
+</body>
+</html>
