@@ -33,12 +33,34 @@
                 })
                 contador += 1;
             })
+
+            $("#botonmodificar").click(function() {
+                var dept = new Object();
+                //EL NUMERO DE DEPARTAMENTO QUE QUIERO MODIFICAR
+                dept.idDepartamento = 99;
+                dept.nombre = "UPDATED " + contador;
+                dept.localidad = "BADAJOZ " + contador;
+                var json = JSON.stringify(dept);
+                var request = "api/departamentos";
+                $.ajax({
+                    "url": url + request, 
+                    "type": "PUT",
+                    "contentType": "application/json", 
+                    "data": json,
+                    success: function(){
+                        $("#mensaje").text("Departamento " + dept.nombre + " modificado!!!");
+                    }
+                })
+            })
         })
     </script>
 </head>
 <body>
     <button id="botoninsertar">
         Insertar departamento
+    </button>
+    <button id="botonmodificar">
+        Modificar departamento 99
     </button>
     <h1 style="color:blue" id="mensaje"></h1>
 </body>
