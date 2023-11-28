@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API POST</title>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script>
+        var contador = 99;
+        $(document).ready(function(){
+            var url = "https://apiejemplos.azurewebsites.net/";
+            $("#botoninsertar").click(function() {
+                var id = contador;
+                var nombre = "HTML " + contador;
+                var localidad = "CACERES " + contador;
+                //CREAMOS UN NUEVO DEPARTAMENTO
+                var dept = new Object();
+                //LE DAMOS LAS MISMAS PROPIEDADES QUE TIENE EL JSON
+                dept.idDepartamento = id;
+                dept.nombre = nombre;
+                dept.localidad = localidad;
+                //CONVERTIMOS EL DEPARTAMENTO A FORMATO JSON
+                var json = JSON.stringify(dept);
+                var request = "api/departamentos";
+                $.ajax({
+                    "url": url + request,
+                    "type": "POST", 
+                    "contentType": "application/json", 
+                    "data": json,
+                    success: function() {
+                        $("#mensaje").text("Departamento " + dept.nombre + " insertado!!!");
+                    }
+                })
+                contador += 1;
+            })
+        })
+    </script>
+</head>
+<body>
+    <button id="botoninsertar">
+        Insertar departamento
+    </button>
+    <h1 style="color:blue" id="mensaje"></h1>
+</body>
+</html>
